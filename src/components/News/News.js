@@ -1,11 +1,38 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 const News = () => {
-    return (
-        <div>
-            <h1>News</h1>
-        </div>
-    );
+	const [news, setNews] = useState();
+	const url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=d396920026af447cbc3f238300f54c2d`;
+
+	useEffect(() => {
+		fetch(url)
+			.then((res) => res.json())
+			.then((resJson) => setNews(resJson))
+			.catch(console.error);
+	}, []);
+
+	return (
+		<div>
+			<h1 id='trending-news'>Trending News:</h1>
+			<section className='container'>
+				{console.log(news)}
+				{news?.articles.map((article) => (
+					<div
+						key={article.title}
+						className='card'
+						style={{ backgroundImage: `url(${article.urlToImage})` }}>
+						<div className='card-title'>
+							<a
+								href={article.url}
+								style={{ textDecoration: 'none', color: 'white' }}>
+								<h5>{article.title}</h5>
+							</a>
+						</div>
+					</div>
+				))}
+			</section>
+		</div>
+	);
 };
 
 export default News;
