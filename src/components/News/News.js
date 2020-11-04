@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 const News = () => {
 	const [news, setNews] = useState();
-	const url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=d396920026af447cbc3f238300f54c2d`;
+	const url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${process.env.REACT_APP_NEWS_API_KEY}`;
 
 	useEffect(() => {
 		fetch(url)

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 const Weather = () => {
     const [weather, setWeather] = useState();
-    const url = `https://api.weatherbit.io/v2.0/current?city=Chicago&units=I&key=9f55bedf98284c1f8f97fb06b6899356`;
+    const url = `https://api.weatherbit.io/v2.0/current?city=Chicago&units=I&key=${process.env.REACT_APP_WEATHER_API_KEY}`;
     useEffect(() => {
         fetch(url)
             .then((res) => res.json())
@@ -28,7 +28,7 @@ const Weather = () => {
 			<div className='temp-info'>
 				<h5>Precipitation: {weather?.data[0].precip}%</h5>
 				<h5>Humidity: {weather?.data[0].rh}%</h5>
-				<h5>Wind: {(weather?.data[0].wind_spd * 2.237).toFixed(0)}</h5>
+				<h5>Wind: {(weather?.data[0].wind_spd * 2.237).toFixed(0)}mph</h5>
 			</div>
 		</div>
 		);
